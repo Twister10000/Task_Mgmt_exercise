@@ -159,5 +159,5 @@ void vButtonTask(void *pvParameters) {
 			vTaskSuspend(LED3);
 			vTaskSuspend(LED1);
 		}
-	
+	}
 }
