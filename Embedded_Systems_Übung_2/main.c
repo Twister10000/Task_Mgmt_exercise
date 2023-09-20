@@ -25,6 +25,7 @@
 #include "utils.h"
 #include "errorHandler.h"
 #include "NHD0420Driver.h"
+#include "ButtonHandler.h"
 
 
 extern void vApplicationIdleHook( void );
