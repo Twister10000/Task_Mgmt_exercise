@@ -30,9 +30,16 @@
 
 extern void vApplicationIdleHook( void );
 void vLedBlink(void *pvParameters);
+void vLEDTASK1(void *pvParameters);
+void vLEDTASK2(void *pvParameters);
+void vLEDTASK3(void *pvParameters);
+void vLEDTASK4(void *pvParameters);
 
 TaskHandle_t ledTask;
-
+TaskHandle_t LED1;
+TaskHandle_t LED2;
+TaskHandle_t LED3;
+TaskHandle_t LED4;
 void vApplicationIdleHook( void )
 {	
 	
