@@ -29,7 +29,7 @@
 
 
 extern void vApplicationIdleHook( void );
-void vLedBlink(void *pvParameters);
+void vButtonTask(void *pvParameters);
 void vLEDTASK1(void *pvParameters);
 void vLEDTASK2(void *pvParameters);
 void vLEDTASK3(void *pvParameters);
