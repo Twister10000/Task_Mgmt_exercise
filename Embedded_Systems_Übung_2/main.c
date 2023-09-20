@@ -85,6 +85,47 @@ void vLedBlink(void *pvParameters) {
 	}
 }
 
+void vLEDTASK1(void *pvParameters){
+	
+	(void) pvParameters;
+	PORTF.DIRSET = 0x03;
+	PORTF.OUT = 0x03;
+	for(;;) {
+		PORTF.OUTTGL = 0x03;
+		vTaskDelay(100 / portTICK_RATE_MS);
+	}
+}
+void vLEDTASK2(void *pvParameters){
+	
+	(void) pvParameters;
+	PORTF.DIRSET = 0x0C;
+	PORTF.OUT = 0x0C;
+	for(;;) {
+		PORTF.OUTTGL = 0x0C;
+		vTaskDelay(100 / portTICK_RATE_MS);
+	}
+}
+void vLEDTASK3(void *pvParameters){
+	
+	(void) pvParameters;
+	PORTE.DIRSET = 0x03;
+	PORTE.OUT = 0x03;
+	for(;;) {
+		PORTE.OUTTGL = 0x03;
+		vTaskDelay(100 / portTICK_RATE_MS);
+	}
+}
+void vLEDTASK4(void *pvParameters){
+	
+	(void) pvParameters;
+	PORTE.DIRSET = 0x0C;
+	PORTE.OUT = 0x0C;
+	for(;;) {
+		PORTE.OUTTGL = 0x0C;
+		vTaskDelay(100 / portTICK_RATE_MS);
+	}
+}
+
 void vButtonTask(void *pvParameters) {
 	initButtons();
 	vTaskDelay(3000);
