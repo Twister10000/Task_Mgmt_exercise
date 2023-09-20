@@ -45,7 +45,7 @@ int main(void)
 	vInitClock();
 	vInitDisplay();
 	
-	xTaskCreate( vLedBlink, (const char *) "ledBlink", configMINIMAL_STACK_SIZE+10, NULL, 1, &ledTask);
+	xTaskCreate(vButtonTask, (const char *) "btTask", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
 
 	vDisplayClear();
 	vDisplayWriteStringAtPos(0,0,"FreeRTOS 10.0.1");
@@ -72,4 +72,14 @@ void vLedBlink(void *pvParameters) {
 		PORTF.OUTTGL = 0x01;				
 		vTaskDelay(100 / portTICK_RATE_MS);
 	}
+}
+
+void vButtonTask(void *pvParameters) {
+	initButtons();
+	vTaskDelay(3000);
+	vDisplayClear();
+	vDisplayWriteStringAtPos(0,0, "Button-DemoProgram");
+	vDisplayWriteStringAtPos(1,0, "LastPress: None");
+	vDisplayWriteStringAtPos(2,0, "Type: Not Pressed");
+	
 }
