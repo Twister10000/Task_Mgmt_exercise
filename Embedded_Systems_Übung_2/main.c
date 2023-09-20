@@ -134,4 +134,49 @@ void vButtonTask(void *pvParameters) {
 	vDisplayWriteStringAtPos(1,0, "LastPress: None");
 	vDisplayWriteStringAtPos(2,0, "Type: Not Pressed");
 	
+	for(;;) {
+		updateButtons();
+		
+		if(getButtonPress(BUTTON1) == SHORT_PRESSED) {
+			
+			vDisplayClear();
+			vDisplayWriteStringAtPos(0,0, "Button-DemoProgram");
+			vDisplayWriteStringAtPos(1,0, "LastPress: Button1");
+			vDisplayWriteStringAtPos(2,0, "Type: Short");
+			vTaskResume(LED1);
+			vTaskSuspend(LED2);
+			vTaskSuspend(LED3);
+			vTaskSuspend(LED4);
+		}
+		if(getButtonPress(BUTTON2) == SHORT_PRESSED) {
+			vDisplayClear();
+			vDisplayWriteStringAtPos(0,0, "Button-DemoProgram");
+			vDisplayWriteStringAtPos(1,0, "LastPress: Button2");
+			vDisplayWriteStringAtPos(2,0, "Type: Short");
+			vTaskResume(LED2);
+			vTaskSuspend(LED1);
+			vTaskSuspend(LED3);
+			vTaskSuspend(LED4);
+		}
+		if(getButtonPress(BUTTON3) == SHORT_PRESSED) {
+			vDisplayClear();
+			vDisplayWriteStringAtPos(0,0, "Button-DemoProgram");
+			vDisplayWriteStringAtPos(1,0, "LastPress: Button3");
+			vDisplayWriteStringAtPos(2,0, "Type: Short");
+			vTaskResume(LED3);
+			vTaskSuspend(LED2);
+			vTaskSuspend(LED1);
+			vTaskSuspend(LED4);
+		}
+		if(getButtonPress(BUTTON4) == SHORT_PRESSED) {
+			vDisplayClear();
+			vDisplayWriteStringAtPos(0,0, "Button-DemoProgram");
+			vDisplayWriteStringAtPos(1,0, "LastPress: Button4");
+			vDisplayWriteStringAtPos(2,0, "Type: Short");
+			vTaskResume(LED4);
+			vTaskSuspend(LED2);
+			vTaskSuspend(LED3);
+			vTaskSuspend(LED1);
+		}
+	
 }
