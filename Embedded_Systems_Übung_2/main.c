@@ -114,7 +114,6 @@ void vButtonTask(void *pvParameters) {
 	vDisplayWriteStringAtPos(0,0, "Button-DemoProgram");
 	vDisplayWriteStringAtPos(1,0, "LastPress: None");
 	vDisplayWriteStringAtPos(2,0, "Type: Not Pressed");
-	
 	for(;;) {
 		updateButtons();
 		
@@ -159,5 +158,6 @@ void vButtonTask(void *pvParameters) {
 			vTaskSuspend(LED3);
 			vTaskSuspend(LED1);
 		}
+		vTaskDelay((1000/BUTTON_UPDATE_FREQUENCY_HZ)/portTICK_RATE_MS);
 	}
 }
