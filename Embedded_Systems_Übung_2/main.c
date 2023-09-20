@@ -106,7 +106,6 @@ void vLEDTASK4(void *pvParameters){
 		vTaskDelay(100 / portTICK_RATE_MS);
 	}
 }
-
 void vButtonTask(void *pvParameters) {
 	initButtons();
 	vTaskDelay(3000);
