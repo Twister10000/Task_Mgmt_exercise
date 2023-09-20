@@ -53,10 +53,10 @@ int main(void)
 	vInitDisplay();
 	
 	xTaskCreate(vButtonTask, (const char *) "btTask", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
-	xTaskCreate(vLEDTASK1, (const char *) "LEDTSK1", configMINIMAL_STACK_SIZE, NULL, 1, &LED1);
-	xTaskCreate(vLEDTASK2, (const char *) "LEDTSK2", configMINIMAL_STACK_SIZE, NULL, 1, &LED2);
-	xTaskCreate(vLEDTASK3, (const char *) "LEDTSK3", configMINIMAL_STACK_SIZE, NULL, 1, &LED3);
-	xTaskCreate(vLEDTASK4, (const char *) "LEDTSK4", configMINIMAL_STACK_SIZE, NULL, 1, &LED4);
+	xTaskCreate(vLEDTASK1, (const char *) "LEDTSK1", configMINIMAL_STACK_SIZE, NULL, 0, &LED1);
+	xTaskCreate(vLEDTASK2, (const char *) "LEDTSK2", configMINIMAL_STACK_SIZE, NULL, 0, &LED2);
+	xTaskCreate(vLEDTASK3, (const char *) "LEDTSK3", configMINIMAL_STACK_SIZE, NULL, 0, &LED3);
+	xTaskCreate(vLEDTASK4, (const char *) "LEDTSK4", configMINIMAL_STACK_SIZE, NULL, 0, &LED4);
 
 	vDisplayClear();
 	vDisplayWriteStringAtPos(0,0,"FreeRTOS 10.0.1");
