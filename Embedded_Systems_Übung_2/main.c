@@ -52,6 +52,10 @@ int main(void)
 	vInitClock();
 	vInitDisplay();
 	
+	PORTF.DIRSET = 0x0F;
+	PORTE.DIRSET = 0x0F;
+	
+	
 	xTaskCreate(vButtonTask, (const char *) "btTask", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
 	xTaskCreate(vLEDTASK1, (const char *) "LEDTSK1", configMINIMAL_STACK_SIZE, NULL, 0, &LED1);
 	xTaskCreate(vLEDTASK2, (const char *) "LEDTSK2", configMINIMAL_STACK_SIZE, NULL, 0, &LED2);
@@ -74,8 +78,8 @@ int main(void)
 void vLEDTASK1(void *pvParameters){
 	
 	(void) pvParameters;
-	PORTF.DIRSET = 0x03;
-	PORTF.OUT = 0x03;
+	PORTF.OUT = 0x0F;
+	PORTE.OUT = 0x0F;
 	for(;;) {
 		PORTF.OUTTGL = 0x03;
 		vTaskDelay(100 / portTICK_RATE_MS);
@@ -84,8 +88,8 @@ void vLEDTASK1(void *pvParameters){
 void vLEDTASK2(void *pvParameters){
 	
 	(void) pvParameters;
-	PORTF.DIRSET = 0x0C;
-	PORTF.OUT = 0x0C;
+	PORTF.OUT = 0x0F;
+	PORTE.OUT = 0x0F;
 	for(;;) {
 		PORTF.OUTTGL = 0x0C;
 		vTaskDelay(100 / portTICK_RATE_MS);
@@ -94,8 +98,8 @@ void vLEDTASK2(void *pvParameters){
 void vLEDTASK3(void *pvParameters){
 	
 	(void) pvParameters;
-	PORTE.DIRSET = 0x03;
-	PORTE.OUT = 0x03;
+	PORTF.OUT = 0x0F;
+	PORTE.OUT = 0x0F;
 	for(;;) {
 		PORTE.OUTTGL = 0x03;
 		vTaskDelay(100 / portTICK_RATE_MS);
@@ -104,8 +108,8 @@ void vLEDTASK3(void *pvParameters){
 void vLEDTASK4(void *pvParameters){
 	
 	(void) pvParameters;
-	PORTE.DIRSET = 0x0C;
-	PORTE.OUT = 0x0C;
+	PORTF.OUT = 0x0F;
+	PORTE.OUT = 0x0F;
 	for(;;) {
 		PORTE.OUTTGL = 0x0C;
 		vTaskDelay(100 / portTICK_RATE_MS);
