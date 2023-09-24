@@ -57,6 +57,11 @@ int main(void)
 	xTaskCreate(vLEDTASK2, (const char *) "LEDTSK2", configMINIMAL_STACK_SIZE, NULL, 0, &LED2);
 	xTaskCreate(vLEDTASK3, (const char *) "LEDTSK3", configMINIMAL_STACK_SIZE, NULL, 0, &LED3);
 	xTaskCreate(vLEDTASK4, (const char *) "LEDTSK4", configMINIMAL_STACK_SIZE, NULL, 0, &LED4);
+	
+	vTaskSuspend(LED1);
+	vTaskSuspend(LED2);
+	vTaskSuspend(LED3);
+	vTaskSuspend(LED4);
 
 	vDisplayClear();
 	vDisplayWriteStringAtPos(0,0,"FreeRTOS 10.0.1");
