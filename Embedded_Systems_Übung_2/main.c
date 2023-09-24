@@ -34,12 +34,14 @@ void vLEDTASK1(void *pvParameters);
 void vLEDTASK2(void *pvParameters);
 void vLEDTASK3(void *pvParameters);
 void vLEDTASK4(void *pvParameters);
+void vLoadKiller(void *pvParameters);
 
 TaskHandle_t ledTask;
 TaskHandle_t LED1;
 TaskHandle_t LED2;
 TaskHandle_t LED3;
 TaskHandle_t LED4;
+TaskHandle_t Loadk;
 void vApplicationIdleHook( void )
 {	
 	
@@ -55,17 +57,18 @@ int main(void)
 	PORTF.DIRSET = 0x0F;
 	PORTE.DIRSET = 0x0F;
 	
-	
 	xTaskCreate(vButtonTask, (const char *) "btTask", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
 	xTaskCreate(vLEDTASK1, (const char *) "LEDTSK1", configMINIMAL_STACK_SIZE, NULL, 0, &LED1);
 	xTaskCreate(vLEDTASK2, (const char *) "LEDTSK2", configMINIMAL_STACK_SIZE, NULL, 0, &LED2);
 	xTaskCreate(vLEDTASK3, (const char *) "LEDTSK3", configMINIMAL_STACK_SIZE, NULL, 0, &LED3);
 	xTaskCreate(vLEDTASK4, (const char *) "LEDTSK4", configMINIMAL_STACK_SIZE, NULL, 0, &LED4);
-	
+	xTaskCreate(vLoadKiller, (const char *) "LoadKiller", configMINIMAL_STACK_SIZE, NULL, 0, &Loadk);	
+
 	vTaskSuspend(LED1);
 	vTaskSuspend(LED2);
 	vTaskSuspend(LED3);
 	vTaskSuspend(LED4);
+	vTaskSuspend(Loadk);
 
 	vDisplayClear();
 	vDisplayWriteStringAtPos(0,0,"FreeRTOS 10.0.1");
@@ -114,6 +117,16 @@ void vLEDTASK4(void *pvParameters){
 		PORTE.OUTTGL = 0x0C;
 		vTaskDelay(100 / portTICK_RATE_MS);
 	}
+}
+void vLoadKiller(void *pvParameters){
+
+	(void) pvParameters;
+
+	for(;;){
+
+		vTaskDelay(100 / portTICK_RATE_MS);
+}
+
 }
 void vButtonTask(void *pvParameters) {
 	initButtons();
