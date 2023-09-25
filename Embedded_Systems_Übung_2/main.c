@@ -35,6 +35,9 @@ void vLEDTASK2(void *pvParameters);
 void vLEDTASK3(void *pvParameters);
 void vLEDTASK4(void *pvParameters);
 void vLoadKiller(void *pvParameters);
+void vVariables1(void *pvParameters);
+void vVariables2(void *pvParameters);
+void vVariables3(void *pvParameters);
 
 TaskHandle_t ledTask;
 TaskHandle_t LED1;
@@ -42,6 +45,9 @@ TaskHandle_t LED2;
 TaskHandle_t LED3;
 TaskHandle_t LED4;
 TaskHandle_t Loadk;
+TaskHandle_t Variables1;
+TaskHandle_t Variables2;
+TaskHandle_t Variables3;
 void vApplicationIdleHook( void )
 {	
 	
@@ -58,17 +64,20 @@ int main(void)
 	PORTE.DIRSET = 0x0F;
 	
 	xTaskCreate(vButtonTask, (const char *) "btTask", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
-	xTaskCreate(vLEDTASK1, (const char *) "LEDTSK1", configMINIMAL_STACK_SIZE, NULL, 0, &LED1);
-	xTaskCreate(vLEDTASK2, (const char *) "LEDTSK2", configMINIMAL_STACK_SIZE, NULL, 0, &LED2);
-	xTaskCreate(vLEDTASK3, (const char *) "LEDTSK3", configMINIMAL_STACK_SIZE, NULL, 0, &LED3);
-	xTaskCreate(vLEDTASK4, (const char *) "LEDTSK4", configMINIMAL_STACK_SIZE, NULL, 0, &LED4);
-	xTaskCreate(vLoadKiller, (const char *) "LoadKiller", configMINIMAL_STACK_SIZE, NULL, 2, &Loadk);	
+	xTaskCreate(vLEDTASK1, (const char *) "LEDTSK1", configMINIMAL_STACK_SIZE, NULL, 1, &LED1);
+	xTaskCreate(vLEDTASK2, (const char *) "LEDTSK2", configMINIMAL_STACK_SIZE, NULL, 1, &LED2);
+	xTaskCreate(vLEDTASK3, (const char *) "LEDTSK3", configMINIMAL_STACK_SIZE, NULL, 1, &LED3);
+	xTaskCreate(vLEDTASK4, (const char *) "LEDTSK4", configMINIMAL_STACK_SIZE, NULL, 1, &LED4);
+	xTaskCreate(vLoadKiller, (const char *) "LoadKiller", configMINIMAL_STACK_SIZE, NULL, 0, &Loadk);
+	xTaskCreate(vVariables1, (const char *) "Variables1", configMINIMAL_STACK_SIZE, NULL, 0, &Variables1);
+	//xTaskCreate(vVariables2, (const char *) "Variables2", configMINIMAL_STACK_SIZE, NULL, 0, &Variables2);	
+	//xTaskCreate(vVariables3, (const char *) "Variables3", configMINIMAL_STACK_SIZE, NULL, 0, &Variables3);			
 
 	vTaskSuspend(LED1);
 	vTaskSuspend(LED2);
 	vTaskSuspend(LED3);
 	vTaskSuspend(LED4);
-	//vTaskSuspend(Loadk);
+	vTaskSuspend(Loadk);
 
 	vDisplayWriteStringAtPos(0,0,"FreeRTOS 10.0.1");
 	vDisplayWriteStringAtPos(1,0,"EDUBoard 1.0");
@@ -126,6 +135,52 @@ vDisplayClear();
 		vDisplayWriteStringAtPos(0,0, "Loadkiller is Working");
 		//vTaskDelay(100 / portTICK_RATE_MS);
 }
+
+}
+
+void vVariables1(void *pvParameters){
+	(void) pvParameters;
+	
+	for(;;){
+		
+		unsigned int alpha;
+		int alpha2;
+		int alpha4;
+
+		
+		
+		
+		vTaskDelay(100 / portTICK_RATE_MS);
+	}
+
+}
+void vVariables2(void *pvParameters){
+	(void) pvParameters;
+	
+	for(;;){
+		
+int beta;
+		
+		
+		vTaskDelay(100 / portTICK_RATE_MS);
+	}
+
+}
+void vVariables3(void *pvParameters){
+	(void) pvParameters;
+	
+	for(;;){
+		
+		int gamma1 = 0;
+		int gamma2= 0;
+		int gamma3 = 0;
+		int gamma4 = 0;
+		int gamma5 = 0;
+		
+		
+		
+		vTaskDelay(100 / portTICK_RATE_MS);
+	}
 
 }
 void vButtonTask(void *pvParameters) {
