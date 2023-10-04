@@ -63,13 +63,13 @@ int main(void)
 	PORTF.DIRSET = 0x0F;
 	PORTE.DIRSET = 0x0F;
 	
-	xTaskCreate(vButtonTask, (const char *) "btTask", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
+	xTaskCreate(vButtonTask, (const char *) "btTask", configMINIMAL_STACK_SIZE, NULL, 3, NULL);
 	xTaskCreate(vLEDTASK1, (const char *) "LEDTSK1", configMINIMAL_STACK_SIZE, NULL, 1, &LED1);
 	xTaskCreate(vLEDTASK2, (const char *) "LEDTSK2", configMINIMAL_STACK_SIZE, NULL, 1, &LED2);
 	xTaskCreate(vLEDTASK3, (const char *) "LEDTSK3", configMINIMAL_STACK_SIZE, NULL, 1, &LED3);
 	xTaskCreate(vLEDTASK4, (const char *) "LEDTSK4", configMINIMAL_STACK_SIZE, NULL, 1, &LED4);
 	xTaskCreate(vLoadKiller, (const char *) "LoadKiller", configMINIMAL_STACK_SIZE, NULL, 0, &Loadk);
-	xTaskCreate(vVariables1, (const char *) "Variables1", configMINIMAL_STACK_SIZE, NULL, 0, &Variables1);
+	xTaskCreate(vVariables1, (const char *) "Variables1", configMINIMAL_STACK_SIZE, NULL, 1, &Variables1);
 	//xTaskCreate(vVariables2, (const char *) "Variables2", configMINIMAL_STACK_SIZE, NULL, 0, &Variables2);	
 	//xTaskCreate(vVariables3, (const char *) "Variables3", configMINIMAL_STACK_SIZE, NULL, 0, &Variables3);			
 
@@ -127,27 +127,25 @@ void vLEDTASK4(void *pvParameters){
 	}
 }
 void vLoadKiller(void *pvParameters){
-vDisplayClear();
+	uint32_t count = 0;
 	(void) pvParameters;
 	
 	for(;;){
 		
-		vDisplayWriteStringAtPos(0,0, "Loadkiller is Working");
-		//vTaskDelay(100 / portTICK_RATE_MS);
+		count++;
+	}
 }
-
-}
-
 void vVariables1(void *pvParameters){
 	(void) pvParameters;
 	
+			unsigned int alpha;
+			int alpha2;
+			int alpha4;
 	for(;;){
 		
-		unsigned int alpha;
-		int alpha2;
-		int alpha4;
-
-		
+		alpha++;
+		alpha2 += alpha;
+		alpha4 -= alpha;
 		
 		
 		vTaskDelay(100 / portTICK_RATE_MS);
@@ -157,9 +155,11 @@ void vVariables1(void *pvParameters){
 void vVariables2(void *pvParameters){
 	(void) pvParameters;
 	
+	int beta;
+	
 	for(;;){
 		
-int beta;
+		beta++;
 		
 		
 		vTaskDelay(100 / portTICK_RATE_MS);
@@ -169,15 +169,19 @@ int beta;
 void vVariables3(void *pvParameters){
 	(void) pvParameters;
 	
+			int gamma1 = 0;
+			int gamma2= 0;
+			int gamma3 = 0;
+			int gamma4 = 0;
+			int gamma5 = 0;
+	
 	for(;;){
 		
-		int gamma1 = 0;
-		int gamma2= 0;
-		int gamma3 = 0;
-		int gamma4 = 0;
-		int gamma5 = 0;
-		
-		
+		gamma1++;
+		gamma2++;
+		gamma3++;
+		gamma4++;
+		gamma5++;
 		
 		vTaskDelay(100 / portTICK_RATE_MS);
 	}
@@ -185,7 +189,7 @@ void vVariables3(void *pvParameters){
 }
 void vButtonTask(void *pvParameters) {
 	initButtons();
-	vTaskDelay(3000);
+	vTaskDelay(1000);
 	vDisplayClear();
 	vDisplayWriteStringAtPos(0,0, "Button-DemoProgram");
 	vDisplayWriteStringAtPos(1,0, "LastPress: None");
@@ -233,6 +237,16 @@ void vButtonTask(void *pvParameters) {
 			vTaskSuspend(LED2);
 			vTaskSuspend(LED3);
 			vTaskSuspend(LED1);
+		}
+		if ((BUTTON3) == LONG_PRESSED)
+		{
+			
+			
+		}
+		if ((BUTTON4) == LONG_PRESSED)
+		{
+			
+			
 		}
 		vTaskDelay((1000/BUTTON_UPDATE_FREQUENCY_HZ)/portTICK_RATE_MS);
 	}
